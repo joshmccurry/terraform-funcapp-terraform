@@ -13,7 +13,7 @@ resource "azurerm_resource_group" "testapp" {
 }
 
 resource "azurerm_storage_account" "testapp" {
-  name                = format("testfunctionapp-store-%s", lower(substr(uuid(), 0, 4)))
+  name                = format("testfunctionappstore%s", lower(substr(uuid(), 0, 4)))
   resource_group_name      = azurerm_resource_group.testapp.name
   location                 = azurerm_resource_group.testapp.location
   account_tier             = "Standard"
@@ -39,7 +39,7 @@ resource "azurerm_storage_share" "testapp" {
 
 
 resource "azurerm_function_app" "testapp" {
-  name                       = azurerm_resource_group.testapp.name
+  name                       = format("testfunctionapp-%s", substr(uuid(), 0, 4))
   location                   = azurerm_resource_group.testapp.location
   resource_group_name        = azurerm_resource_group.testapp.name
   app_service_plan_id        = azurerm_app_service_plan.testapp.id
