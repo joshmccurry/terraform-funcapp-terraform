@@ -24,7 +24,7 @@ resource "azurerm_storage_account" "testapp" {
   }
 }
 
-resource "azurerm_service_plan" "testapp" {
+resource "azurerm_app_service_plan" "testapp" {
   name                = "azure-functions-test-service-plan"
   location            = azurerm_resource_group.testapp.location
   resource_group_name = azurerm_resource_group.testapp.name
@@ -36,7 +36,7 @@ resource "azurerm_service_plan" "testapp" {
 }
 
 resource "azurerm_storage_share" "testapp" {
-  name                 = format("sharename-%s", lower(substr(uuid(), 0, 4)))
+  name                 = "sharename"
   storage_account_name = azurerm_storage_account.testapp.name
   quota                = 50
 }
